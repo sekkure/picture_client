@@ -1,14 +1,11 @@
 import { Post } from './post'
 
 export interface User {
-  userID: number
-  guid: string
+  userID: string
   name: string
   avatar: string
   about: string
-  registred_at: number
-  password: string
-  passwordSalt: string
+  registredAt: number
   posts: Post[]
 }
 
