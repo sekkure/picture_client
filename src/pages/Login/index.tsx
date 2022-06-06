@@ -2,23 +2,28 @@ import React, { FormEvent, useEffect, useState } from 'react'
 import Input from '../../components/Input'
 
 import { useDispatch } from 'react-redux'
-import { setCredentials } from '../../features/auth/authSlice'
+import {
+  selectCurrentUser,
+  setCredentials,
+} from '../../features/auth/authSlice'
 import {
   useLoginMutation,
   useRegisterMutation,
 } from '../../features/auth/authApiSlice'
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import Button from '../../components/Button'
 import classNames from 'classnames'
 import styles from './index.module.css'
 import { UserLoginData, UserRegistrationData } from '../../types/user'
+import { useSelector } from 'react-redux'
+import Loading from '../../features/Loading'
 
 const LoginPage = () => {
   const [name, setName] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [type, setType] = useState('')
-  const navigate = useNavigate()
+  const user = useSelector(selectCurrentUser)
 
   const [login, { isLoading: loginLoading }] = useLoginMutation()
   const [register, { isLoading: registerLoading }] = useRegisterMutation()
@@ -58,9 +63,7 @@ const LoginPage = () => {
       if (userData) {
         dispatch(setCredentials(userData))
 
-        localStorage.setItem('userId', `${userData.user.userID}`)
-
-        navigate('/')
+        localStorage.setItem('userId', userData.user.userID)
       } else {
         setError('Oopsie... Error')
       }
@@ -73,10 +76,10 @@ const LoginPage = () => {
     }
   }
 
-  return (
+  return !user ? (
     <div className={classNames(styles.mainContainer)}>
       {loginLoading || registerLoading ? (
-        <h1>Wait please a little bit . . .</h1>
+        <Loading />
       ) : (
         <div className={classNames(styles.modalWindow)}>
           <p style={{ color: 'white' }}>{error}</p>
@@ -101,6 +104,8 @@ const LoginPage = () => {
         </div>
       )}
     </div>
+  ) : (
+    <Navigate to={'/'} replace={true} />
   )
 }
 
