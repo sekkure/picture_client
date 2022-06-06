@@ -10,7 +10,7 @@ const PreviewPost = () => {
   )
 
   return post ? (
-    <Post post={post} />
+    <Post post={post} isPreview/>
   ) : (
     <div>
       <h1>Poth with ID "{id}" not found!</h1>
