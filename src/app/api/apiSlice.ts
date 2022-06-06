@@ -9,7 +9,7 @@ import { RefreshTokenData } from '../../types/user'
 import { RootState } from '../store'
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://d3b9-5-18-234-138.ngrok.io',
+  baseUrl: 'https://18e8-5-18-234-138.ngrok.io',
   credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
     const state = getState() as RootState
@@ -43,13 +43,14 @@ const baseQuertWithReauth = async (
 
     if (refreshResult?.data) {
       const user = state.auth.user!
-      const data = refreshResult.data as RefreshTokenData
+      const { access_token, expires_in } =
+        refreshResult.data as RefreshTokenData
 
       api.dispatch(
         setCredentials({
           user,
-          access_token: data.access_token,
-          expires_in: data.expires_in,
+          access_token,
+          expires_in,
         })
       )
 
