@@ -25,3 +25,7 @@ code {
 :root {
   --font-family: 'Roboto';
 }
+
+#root {
+  height: 100%;
+}
