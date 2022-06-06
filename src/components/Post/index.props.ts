@@ -4,4 +4,5 @@ import { Post } from '../../types/post'
 export interface PostProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   post: Post
+  isPreview?: boolean
 }

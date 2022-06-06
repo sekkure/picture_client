@@ -1,0 +1,34 @@
+.title {
+  text-align: center;
+  color: white;
+  font-weight: 400;
+  font-family: var(--font-family);
+  margin: 0;
+}
+
+.picture {
+  object-fit: cover;
+  width: 152px;
+  height: 152px;
+  border-radius: 25px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+}
+
+.vPictures,
+.hPictures {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+}
+
+.vPictures {
+  flex-direction: column;
+}
