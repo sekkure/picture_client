@@ -25,7 +25,7 @@ const Post = ({ post, isPreview, ...props }: PostProps) => {
 
   const mappedPictures = pictures ? (
     pictures.map((picture, idx) => {
-      const link = `https://5c1e-5-18-234-138.ngrok.io/api/picture/${picture.pictureId}`
+      const link = `https://a5b0-5-18-234-138.ngrok.io/api/picture/${picture.pictureId}`
 
       return (
         <img
