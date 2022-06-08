@@ -1,11 +1,12 @@
 import { apiSlice } from '../../app/api/apiSlice'
-import { User } from '../../types/user'
+import { APIEndpoints } from '../../shared/enums'
+import { User } from '../../shared/user'
 
 export const usersApiSlice = apiSlice.injectEndpoints({
   endpoints: builder => ({
     getUserById: builder.mutation<User, string>({
       query: userId => ({
-        url: `/api/user/${userId}`,
+        url: `${APIEndpoints.USER_GET_SINGLE}/${userId}`,
         method: 'GET',
       }),
     }),

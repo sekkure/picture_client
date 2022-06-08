@@ -14,7 +14,7 @@ import { Navigate, useNavigate } from 'react-router-dom'
 import Button from '../../components/Button'
 import classNames from 'classnames'
 import styles from './index.module.css'
-import { UserLoginData, UserRegistrationData } from '../../types/user'
+import { UserLoginData, UserRegistrationData } from '../../shared/user'
 import { useSelector } from 'react-redux'
 import Loading from '../../features/Loading'
 

@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../../app/store'
-import { Post } from '../../types/post'
+import { Post } from '../../shared/post'
 import {
   UserLoginData,
   UserRegistrationData,
   User,
   RefreshTokenData,
-} from '../../types/user'
+} from '../../shared/user'
 
 interface AuthState {
   user: User | null

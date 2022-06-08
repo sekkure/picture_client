@@ -1,11 +1,12 @@
 import { apiSlice } from '../../app/api/apiSlice'
-import { Post, CreatePostData } from '../../types/post'
+import { APIEndpoints } from '../../shared/enums'
+import { Post, CreatePostData } from '../../shared/post'
 
 export const postsApiSlice = apiSlice.injectEndpoints({
   endpoints: builder => ({
     createPost: builder.mutation<Post, CreatePostData>({
       query: data => ({
-        url: '/api/post/create',
+        url: APIEndpoints.POST_CREATE,
         method: 'POST',
         body: data.pictures,
         params: {
@@ -17,10 +18,10 @@ export const postsApiSlice = apiSlice.injectEndpoints({
     }),
     getAllPosts: builder.mutation<Post[], any>({
       query: () => ({
-        url: "/api/post",
-        method: "GET"
-      })
-    })
+        url: APIEndpoints.POST_GET_ALL,
+        method: 'GET',
+      }),
+    }),
   }),
 })
 

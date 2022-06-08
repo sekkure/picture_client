@@ -1,15 +1,16 @@
 import { apiSlice } from '../../app/api/apiSlice'
+import { APIEndpoints } from '../../shared/enums'
 import {
   RefreshTokenData,
   UserLoginData,
   UserRegistrationData,
-} from '../../types/user'
+} from '../../shared/user'
 
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: builder => ({
     login: builder.mutation<UserLoginData, any>({
       query: credentials => ({
-        url: '/api/authentication/login',
+        url: APIEndpoints.AUTH_LOGIN,
         method: 'POST',
         body: {
           ...credentials,
@@ -18,7 +19,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     }),
     register: builder.mutation<UserRegistrationData, any>({
       query: registerData => ({
-        url: '/api/authentication/register',
+        url: APIEndpoints.AUTH_REGISTER,
         method: 'POST',
         body: {
           ...registerData,
@@ -27,7 +28,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     }),
     refreshToken: builder.mutation<RefreshTokenData, any>({
       query: () => ({
-        url: '/api/token/refresh',
+        url: APIEndpoints.TOKEN_REFRESH,
         method: 'POST',
       }),
     }),
