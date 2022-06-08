@@ -9,7 +9,7 @@ import { RefreshTokenData } from '../../types/user'
 import { RootState } from '../store'
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://fef7-5-18-234-138.ngrok.io',
+  baseUrl: 'https://a5b0-5-18-234-138.ngrok.io',
   credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
     const state = getState() as RootState
