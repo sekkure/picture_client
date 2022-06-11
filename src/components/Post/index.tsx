@@ -3,7 +3,7 @@ import { PostProps } from './index.props'
 import styles from './index.module.css'
 import { useNavigate } from 'react-router-dom'
 import Button from '../Button'
-import { APIEndpoints, BASE_API_URL } from '../../types/enums'
+import { APIEndpoints, BASE_API_URL } from '../../shared/enums'
 
 const Post = ({ post, isPreview, className, ...props }: PostProps) => {
   const title = post.title

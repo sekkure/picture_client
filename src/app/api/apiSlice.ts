@@ -5,8 +5,8 @@ import {
   FetchArgs,
 } from '@reduxjs/toolkit/query/react'
 import { setCredentials, logOut } from '../../features/auth/authSlice'
-import { APIEndpoints, BASE_API_URL } from '../../types/enums'
-import { RefreshTokenData } from '../../types/user'
+import { APIEndpoints, BASE_API_URL } from '../../shared/enums'
+import { RefreshTokenData } from '../../shared/user'
 import { RootState } from '../store'
 
 const baseQuery = fetchBaseQuery({

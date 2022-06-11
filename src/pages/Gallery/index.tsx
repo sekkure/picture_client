@@ -3,7 +3,7 @@ import Posts from '../../components/Posts'
 import Loading from '../../features/Loading'
 import { useGetAllPostsMutation } from '../../features/posts/postsApiSlice'
 import WrappedContent from '../../components/WrappedContent'
-import { Post } from '../../types/post'
+import { Post } from '../../shared/post'
 
 const Gallery = () => {
   const [getAllPosts, { isLoading }] = useGetAllPostsMutation()

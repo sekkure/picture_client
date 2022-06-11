@@ -1,10 +1,10 @@
 import { apiSlice } from '../../app/api/apiSlice'
-import { APIEndpoints } from '../../types/enums'
+import { APIEndpoints } from '../../shared/enums'
 import {
   RefreshTokenData,
   UserLoginData,
   UserRegistrationData,
-} from '../../types/user'
+} from '../../shared/user'
 
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: builder => ({
