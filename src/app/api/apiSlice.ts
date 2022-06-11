@@ -5,12 +5,11 @@ import {
   FetchArgs,
 } from '@reduxjs/toolkit/query/react'
 import { setCredentials, logOut } from '../../features/auth/authSlice'
-import { APIEndpoints, BASE_API_URL } from '../../shared/enums'
-import { RefreshTokenData } from '../../shared/user'
+import { RefreshTokenData } from '../../types/user'
 import { RootState } from '../store'
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: BASE_API_URL,
+  baseUrl: 'https://a5b0-5-18-234-138.ngrok.io',
   credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
     const state = getState() as RootState
@@ -35,7 +34,7 @@ const baseQuertWithReauth = async (
     const state = api.getState() as RootState
     const refreshResult = await baseQuery(
       {
-        url: APIEndpoints.TOKEN_REFRESH,
+        url: '/api/token/refresh',
         method: 'POST',
       },
       api,

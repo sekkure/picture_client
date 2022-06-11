@@ -3,7 +3,6 @@ import { PostProps } from './index.props'
 import styles from './index.module.css'
 import { useNavigate } from 'react-router-dom'
 import Button from '../Button'
-import { APIEndpoints, BASE_API_URL } from '../../shared/enums'
 
 const Post = ({ post, isPreview, ...props }: PostProps) => {
   const title = post.title
@@ -26,8 +25,7 @@ const Post = ({ post, isPreview, ...props }: PostProps) => {
 
   const mappedPictures = pictures ? (
     pictures.map((picture, idx) => {
-      const link =
-        BASE_API_URL + APIEndpoints.PICTURE_GET_SINGLE + `/${picture.pictureId}`
+      const link = `https://a5b0-5-18-234-138.ngrok.io/api/picture/${picture.pictureId}`
 
       return (
         <img

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import Posts from '../../components/Posts'
 import Loading from '../../features/Loading'
 import { useGetAllPostsMutation } from '../../features/posts/postsApiSlice'
-import { Post } from '../../shared/post'
+import { Post } from '../../types/post'
 
 const Gallery = () => {
   const [getAllPosts, { isLoading }] = useGetAllPostsMutation()
