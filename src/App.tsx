@@ -6,6 +6,7 @@ import LoginPage from './pages/Login'
 import MainPage from './pages/Main'
 import PreviewPost from './pages/PreviewPost'
 import Gallery from './pages/Gallery'
+import NotFound from './pages/NotFoundPage'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
 
           <Route path="login" element={<LoginPage />} />
           <Route path="gallery" element={<Gallery />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { Outlet } from 'react-router-dom'
+import Header from '../components/Header'
 import { useAppSelector } from '../hooks/redux'
 import { useRefreshTokenMutation } from './auth/authApiSlice'
 import { setCredentials } from './auth/authSlice'
@@ -35,7 +36,12 @@ const Layout = () => {
     }
   }, [userId])
 
-  return !userId || user ? <Outlet /> : <Loading />
+  return (
+    <>
+      <Header />
+      {!userId || user ? <Outlet /> : <Loading />}
+    </>
+  )
 }
 
 export default Layout

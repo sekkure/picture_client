@@ -10,23 +10,21 @@ import {
   useLoginMutation,
   useRegisterMutation,
 } from '../../features/auth/authApiSlice'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import Button from '../../components/Button'
 import classNames from 'classnames'
 import styles from './index.module.css'
-import { UserLoginData, UserRegistrationData } from '../../shared/user'
 import { useSelector } from 'react-redux'
 import Loading from '../../features/Loading'
+import WrappedContent from '../../components/WrappedContent'
+import Text from '../../components/Text'
 
 const LoginPage = () => {
   const [name, setName] = useState('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
-  const [type, setType] = useState('')
   const user = useSelector(selectCurrentUser)
 
   const [login, { isLoading: loginLoading }] = useLoginMutation()
-  const [register, { isLoading: registerLoading }] = useRegisterMutation()
   const dispatch = useDispatch()
 
   const onLoginInput = (event: FormEvent<HTMLInputElement>) => {
@@ -37,75 +35,85 @@ const LoginPage = () => {
     setPassword(event.currentTarget.value)
   }
 
-  useEffect(() => {
-    setError('')
-  }, [name, password])
-
-  const handleSubmit = async (e: any) => {
-    e.preventDefault()
-
+  const handleSubmit = async () => {
     try {
-      let userData: UserLoginData | UserRegistrationData | undefined
-
-      switch (type) {
-        case 'login':
-          userData = await login({ name, password }).unwrap()
-          break
-        case 'register':
-          userData = await register({ name, password }).unwrap()
-          break
-      }
+      const userData = await login({ name, password }).unwrap()
 
       setName('')
       setPassword('')
-      setType('')
 
-      if (userData) {
-        dispatch(setCredentials(userData))
+      dispatch(setCredentials(userData))
 
-        localStorage.setItem('userId', userData.user.userID)
-      } else {
-        setError('Oopsie... Error')
-      }
-    } catch (err: any) {
-      setError(
-        `CODE: ${err.status} | ERR: ${
-          err?.data?.message ?? 'No server response'
-        }`
-      )
-    }
+      localStorage.setItem('userId', userData.user.userID)
+    } catch (err: any) {}
   }
 
-  return !user ? (
-    <div className={classNames(styles.mainContainer)}>
-      {loginLoading || registerLoading ? (
-        <Loading />
-      ) : (
-        <div className={classNames(styles.modalWindow)}>
-          <p style={{ color: 'white' }}>{error}</p>
-          <h1 className={classNames(styles.text)}>Login</h1>
-          <form onSubmit={handleSubmit} className={classNames(styles.authInfo)}>
-            <Input text="Логин" placeholder="Login" onInput={onLoginInput} />
-            <Input
-              text="Пароль"
-              placeholder="Password"
-              onInput={onPasswordInput}
-              type="password"
-            />
-            <div className={classNames(styles.buttons)}>
-              <Button onClick={() => setType('login')} color="blue">
+  return (
+    <WrappedContent className={classNames(styles.mainContainer)}>
+      {!user ? (
+        loginLoading ? (
+          <Loading />
+        ) : (
+          <div>
+            <Text fontSize="64px" className={styles.whiteText}>
+              Log In
+            </Text>
+            <Text fontSize="26px" className={styles.whiteText}>
+              To continue your's adventure
+            </Text>
+            <div className={styles.registerTextBox}>
+              <Text fontSize="16px" className={styles.registerText}>
+                Doesn't have account?
+              </Text>
+              <a className={styles.registerText} href="/register">
                 Sign in
-              </Button>
-              <Button onClick={() => setType('register')} color="blue">
-                Register
-              </Button>
+              </a>
             </div>
-          </form>
-        </div>
+            <form className={styles.loginForm}>
+              <div>
+                <Text
+                  fontSize="16px"
+                  className={classNames(styles.whiteText, styles.text)}
+                  customPaddingMargin
+                >
+                  Login
+                </Text>
+                <Input
+                  className={classNames(styles.input)}
+                  placeholder=""
+                  text=""
+                  onChange={onLoginInput}
+                />
+              </div>
+              <div>
+                <Text
+                  fontSize="16px"
+                  className={classNames(styles.whiteText, styles.text)}
+                  customPaddingMargin
+                >
+                  Password
+                </Text>
+                <Input
+                  onChange={onPasswordInput}
+                  className={classNames(styles.input)}
+                  placeholder=""
+                  text=""
+                  type="password"
+                />
+              </div>
+            </form>
+            <Button
+              className={classNames(styles.loginButton)}
+              onClick={handleSubmit}
+            >
+              Log In
+            </Button>
+          </div>
+        )
+      ) : (
+        <Navigate to={'/'} replace={true} />
       )}
-    </div>
-  ) : (
-    <Navigate to={'/'} replace={true} />
+    </WrappedContent>
   )
 }
 

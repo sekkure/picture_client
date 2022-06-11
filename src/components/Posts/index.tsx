@@ -7,9 +7,7 @@ const Posts = ({ posts, className, ...props }: PostsProps) => {
   return (
     <div {...props} className={classNames(styles.container, className)}>
       {posts.map((post, idx) => (
-        <div className={classNames(styles.secondContainer)} key={idx}>
-          <Post post={post} />
-        </div>
+        <Post key={idx} post={post} />
       ))}
     </div>
   )

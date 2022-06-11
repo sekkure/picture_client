@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 body {
-  background: url('https://images.pexels.com/photos/33227/sunrise-phu-quoc-island-ocean.jpg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1')
+  background: url('https://media-s3-us-east-1.ceros.com/editorial-content/images/2021/02/17/b3d21d7db3cd1c72b1e5b1cc0a88eaf0/378260-space-stars.jpg')
     no-repeat center center fixed;
   padding: 0;
   margin: 0;
@@ -15,6 +15,7 @@ body {
 html,
 body {
   height: 100%;
+  overflow-x: hidden;
 }
 
 code {
@@ -28,4 +29,16 @@ code {
 
 #root {
   height: 100%;
+  flex-direction: column;
+  display: flex;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
 }

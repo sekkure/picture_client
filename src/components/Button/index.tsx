@@ -12,8 +12,8 @@ const Button = ({
 }: ButtonProps) => {
   return (
     <button
-      onClick={onClick}
       {...props}
+      onClick={onClick}
       className={cn(styles.button, className, {
         [styles.buttonDefault]: !color,
         [styles.buttonBlue]: color === 'blue',

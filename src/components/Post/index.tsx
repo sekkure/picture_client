@@ -3,9 +3,9 @@ import { PostProps } from './index.props'
 import styles from './index.module.css'
 import { useNavigate } from 'react-router-dom'
 import Button from '../Button'
-import { APIEndpoints, BASE_API_URL } from '../../shared/enums'
+import { APIEndpoints, BASE_API_URL } from '../../types/enums'
 
-const Post = ({ post, isPreview, ...props }: PostProps) => {
+const Post = ({ post, isPreview, className, ...props }: PostProps) => {
   const title = post.title
   const description = post.description
   const tags = post.tags
@@ -24,23 +24,29 @@ const Post = ({ post, isPreview, ...props }: PostProps) => {
     window.open(url)
   }
 
-  const mappedPictures = pictures ? (
-    pictures.map((picture, idx) => {
-      const link =
-        BASE_API_URL + APIEndpoints.PICTURE_GET_SINGLE + `/${picture.pictureId}`
+  const mappedPictures =
+    pictures && pictures.length ? (
+      pictures.map(({ pictureId }, idx) => {
+        const link =
+          BASE_API_URL + APIEndpoints.PICTURE_GET_SINGLE + '/' + pictureId
 
-      return (
-        <img
-          src={link}
-          className={classNames(styles.picture)}
-          onClick={() => onImageClick(link)}
-          key={idx}
-        />
-      )
-    })
-  ) : (
-    <h1>No pics</h1>
-  )
+        return (
+          <img
+            alt={pictureId}
+            src={link}
+            className={classNames(styles.picture)}
+            onClick={() => onImageClick(link)}
+            key={idx}
+          />
+        )
+      })
+    ) : (
+      <img
+        alt="Not found"
+        src="https://bitsofco.de/content/images/2018/12/broken-1.png"
+        className={classNames(styles.picture)}
+      />
+    )
 
   return isPreview ? (
     <div className={classNames(styles.container)}>
@@ -53,17 +59,7 @@ const Post = ({ post, isPreview, ...props }: PostProps) => {
       <div className={classNames(styles.hPictures)}>{mappedPictures}</div>
     </div>
   ) : (
-    <div {...props}>
-      <h3 className={classNames(styles.title)}>Title: {title}</h3>
-      <h3 className={classNames(styles.title)}>
-        Pictures: {post.pictures ? post.pictures.length : 0}
-      </h3>
-
-      <div className={classNames(styles.vPictures)}>{mappedPictures}</div>
-      <Button onClick={() => onPostPreview(post.postId)}>
-        Open post preview
-      </Button>
-    </div>
+    <div className={classNames(className)}>{title}</div>
   )
 }
 

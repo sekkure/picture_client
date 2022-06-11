@@ -1,6 +1,6 @@
 import { apiSlice } from '../../app/api/apiSlice'
-import { APIEndpoints } from '../../shared/enums'
-import { Post, CreatePostData } from '../../shared/post'
+import { APIEndpoints } from '../../types/enums'
+import { Post, CreatePostData } from '../../types/post'
 
 export const postsApiSlice = apiSlice.injectEndpoints({
   endpoints: builder => ({

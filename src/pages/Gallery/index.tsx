@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react'
 import Posts from '../../components/Posts'
 import Loading from '../../features/Loading'
 import { useGetAllPostsMutation } from '../../features/posts/postsApiSlice'
-import { Post } from '../../shared/post'
+import WrappedContent from '../../components/WrappedContent'
+import { Post } from '../../types/post'
 
 const Gallery = () => {
   const [getAllPosts, { isLoading }] = useGetAllPostsMutation()
@@ -17,10 +18,8 @@ const Gallery = () => {
       .catch(err => console.log(err))
   }, [])
 
-  return isLoading ? (
-    <Loading />
-  ) : (
-    <div
+  return (
+    <WrappedContent
       style={{
         display: 'flex',
         justifyContent: 'center',
@@ -28,8 +27,8 @@ const Gallery = () => {
         flexWrap: 'wrap',
       }}
     >
-      {<Posts posts={posts} />}
-    </div>
+      {isLoading ? <Loading /> : <Posts posts={posts} />}
+    </WrappedContent>
   )
 }
 
